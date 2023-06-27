@@ -3,8 +3,8 @@
 
 using heroes_Vs_Monster;
 using heroes_Vs_Monster.Entity;
-
-
-
-Game  b =  new Game();
+using System.Text.Unicode;
+Console.CursorVisible = false;
+Console.OutputEncoding = System.Text.Encoding.UTF8;
+Game b =  new Game();
 

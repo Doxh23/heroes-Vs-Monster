@@ -14,12 +14,8 @@ namespace heroes_Vs_Monster.Entity {
         public int lvl = 1;
         public int xp = 1;
         private int yaw;
-        private int  x;
-            private int y;
 
         public Heroes() {
-            x = Board.HeroPositionX;
-            x = Board.HeroPositionY;
             }   
         public void LevelUp() {
             yaw = (int)Math.Round(lvl * 2.5 / 1.2);
