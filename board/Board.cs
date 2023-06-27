@@ -38,17 +38,18 @@ namespace heroes_Vs_Monster.board {
             BaseBoard();
 
             updateStats(hero);
-            //for(int i = 2; x >= i+bottomInformationX+6 ; i++) {
-            //    Console.SetCursorPosition(i + bottomInformationX +1,yPositionForItem-2);
-            //    if ( i == 2 || i == 3 || i == x-bottomInformationX -6 || x-bottomInformationX-7 == i ) {
-            //        Console.Write("*"); }
-            //        else{
-            //        Console.Write("-");
-                        
-            //            }
-                
-            //        }
-                
+            for ( int i = 2; x >= i + bottomInformationX + 6; i++ ) {
+                Console.SetCursorPosition(i + bottomInformationX + 1 ,yPositionForItem - 2);
+                if ( i == 2 || i == 3 || i == x - bottomInformationX - 6 || x - bottomInformationX - 7 == i ) {
+                    Console.Write("*");
+                    }
+                else {
+                    Console.Write("-");
+
+                    }
+
+                }
+
             updateLoots(hero);
 
             }
