@@ -10,6 +10,7 @@ using heroes_Vs_Monster.Item;
 using System.Security.Cryptography.X509Certificates;
 using System.Runtime.CompilerServices;
 using System.Xml;
+using System.ComponentModel.Design;
 
 namespace heroes_Vs_Monster.board {
     static class Board {
@@ -21,15 +22,33 @@ namespace heroes_Vs_Monster.board {
         static private int yPositionForItem;
         static public int HeroPositionX = ( x - 2 - 32 ) / 2;
         static public int HeroPositionY = ( y - 11 ) / 2;
-
+        static public int bottomInformationY = y-2;
+        static public int bottomInformationX = x - 32;
+        static public int logPositionY = ( y - 10 ) / 2;
+        public static ConsoleColor BasicBackground = ConsoleColor.Blue;
+        public static ConsoleColor Background = ConsoleColor.White;
+        public static ConsoleColor fontColor = ConsoleColor.White;
+        public static ConsoleColor selectColor = ConsoleColor.Blue;
+       
 
         public static void InitBoard(Heroes? hero = null) {
-            yPositionForItem = yPositionForStat + Enum.GetValues(typeof(StatType)).Length * 2 + 4;
+            yPositionForItem = yPositionForStat + Enum.GetValues(typeof(StatType)).Length * 2 +2;
             Console.ResetColor();
-            Console.BackgroundColor = ConsoleColor.Blue;
+            Console.BackgroundColor = BasicBackground;
             BaseBoard();
 
             updateStats(hero);
+            //for(int i = 2; x >= i+bottomInformationX+6 ; i++) {
+            //    Console.SetCursorPosition(i + bottomInformationX +1,yPositionForItem-2);
+            //    if ( i == 2 || i == 3 || i == x-bottomInformationX -6 || x-bottomInformationX-7 == i ) {
+            //        Console.Write("*"); }
+            //        else{
+            //        Console.Write("-");
+                        
+            //            }
+                
+            //        }
+                
             updateLoots(hero);
 
             }
@@ -70,7 +89,7 @@ namespace heroes_Vs_Monster.board {
                     if ( ( b == 0 || b == x - 2 || b == x - 32 ) && i != 0 ) {
                         sb.Append('|');
                         }
-                    else if ( !( b == 0 || b == x - 2 || b == x - 32 ) && ( i == y - 1 || i == 0 || i == y - 10 ) ) {
+                    else if ( !( b == 0 || b == x - 2 || b == x - 32 ) && ( i == y - 1 || i == 0 || i == y - 10 )  ) {
                         sb.Append('_');
                         }
 
@@ -97,6 +116,8 @@ namespace heroes_Vs_Monster.board {
 
                 }
             updateLoots(hero);
+            Utils.LogCombatReset();
+
             }
        
         }

@@ -11,7 +11,6 @@ namespace heroes_Vs_Monster {
         List<Character> monsters = new List<Character>();
 
         public Game() {
-
             /// TODO moment de rencontre avec un monstre
             Heroes hero = new Human("dante");
 
@@ -19,10 +18,9 @@ namespace heroes_Vs_Monster {
             int moveX = Board.HeroPositionX;
             int moveY = Board.HeroPositionY;
             Console.SetCursorPosition(moveX ,moveY);
-
             while ( isAlive ) {
 
-                ConsoleKeyInfo k = Console.ReadKey();
+                ConsoleKeyInfo k = Console.ReadKey(true);
                 switch ( k.Key ) {
 
                     case ConsoleKey.UpArrow:
@@ -112,30 +110,6 @@ namespace heroes_Vs_Monster {
             hero.inventaire[(LootType) nbr] += 2;
             }
 
-        public bool CombatAleatoire2() {
-                Character monster = Utils.generateMonster();
-
-                hero.LootEvent += hero.HealAction;
-                hero.LootEvent += hero.LootAction;
-
-                do {
-                    Console.WriteLine($"{hero.stats[StatType.hp]} : life");
-
-                    hero.Attaque(monster ,1);
-                    if ( monster.stats[StatType.hp] <= 0 ) {
-
-                        return true;
-                        }
-                    monster.Attaque(hero ,1);
-                    if ( hero.stats[StatType.hp] <= 0 ) {
-                        return false;
-                        }
-
-
-                    }
-                while ( true );
-
-                }
         public bool CombatAleatoire() {
             
             Character monster = Utils.generateMonster();
@@ -144,14 +118,14 @@ namespace heroes_Vs_Monster {
             hero.LootEvent += hero.LootAction;
 
             do {
-               int rps = Nav.NavList(10 ,4 ,5 ,25);
+
+               int rps = Nav.NavList(10  ,5 ,Board.y-5);
                 Console.WriteLine(rps);
                 switch ( rps ) {
                     case 0:
                         hero.Attaque(monster ,1);
                     break;
                     }
-                Console.WriteLine($"{monster.stats[StatType.hp]} :   monstre");
                 if ( monster.stats[StatType.hp] <= 0 ) {
                     
                     return true;
@@ -160,8 +134,7 @@ namespace heroes_Vs_Monster {
                 if ( hero.stats[StatType.hp] <= 0 ) {
                     return false;
                     }
-                Console.WriteLine($"{hero.stats[StatType.hp]} :   hero");
-
+                Utils.LogCombat(hero,monster);
                 }
             while ( true );
 

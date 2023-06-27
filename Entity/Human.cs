@@ -14,7 +14,7 @@ namespace heroes_Vs_Monster.Entity {
        
         protected override void statsGeneration() {
             base.statsGeneration();
-            stats[StatType.hp] += +4;
+            stats[StatType.hp] += +99;
             }
         }
 

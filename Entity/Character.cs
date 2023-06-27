@@ -32,7 +32,6 @@ namespace heroes_Vs_Monster.Entity {
             int nbrDamage = nbrDice + Bonus(StatType.force);
             nbrDamage = nbrDamage < 0 ? 0 : nbrDamage;
             E.stats[StatType.hp] -= nbrDamage;
-            Console.WriteLine($"{E.Name} a pris {nbrDamage}");
 
             }
        
