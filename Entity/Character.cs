@@ -9,9 +9,7 @@ using System.Xml.Schema;
 
 namespace heroes_Vs_Monster.Entity {
 
-    public enum TypeLoot {
-       cuir,or 
-        }
+  
    public  class Character {
        
         public string Name;

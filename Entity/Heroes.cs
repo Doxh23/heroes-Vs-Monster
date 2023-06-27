@@ -1,4 +1,5 @@
-﻿using heroes_Vs_Monster.Item;
+﻿using heroes_Vs_Monster.board;
+using heroes_Vs_Monster.Item;
 using heroes_Vs_Monster.utils;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,14 @@ namespace heroes_Vs_Monster.Entity {
         public event Action<Character> HealEvent;
         public int lvl = 1;
         public int xp = 1;
-        public int yaw;
+        private int yaw;
+        private int  x;
+            private int y;
 
-
+        public Heroes() {
+            x = Board.HeroPositionX;
+            x = Board.HeroPositionY;
+            }   
         public void LevelUp() {
             yaw = (int)Math.Round(lvl * 2.5 / 1.2);
             if ( yaw <= xp ) {
