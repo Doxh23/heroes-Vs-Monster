@@ -1,0 +1,15 @@
+C:\Users\Adrien\source\repos\heroes Vs Monster\bin\Debug\net7.0\heroes Vs Monster.exe
+C:\Users\Adrien\source\repos\heroes Vs Monster\bin\Debug\net7.0\heroes Vs Monster.deps.json
+C:\Users\Adrien\source\repos\heroes Vs Monster\bin\Debug\net7.0\heroes Vs Monster.runtimeconfig.json
+C:\Users\Adrien\source\repos\heroes Vs Monster\bin\Debug\net7.0\heroes Vs Monster.dll
+C:\Users\Adrien\source\repos\heroes Vs Monster\bin\Debug\net7.0\heroes Vs Monster.pdb
+C:\Users\Adrien\source\repos\heroes Vs Monster\obj\Debug\net7.0\heroes Vs Monster.csproj.AssemblyReference.cache
+C:\Users\Adrien\source\repos\heroes Vs Monster\obj\Debug\net7.0\heroes Vs Monster.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Adrien\source\repos\heroes Vs Monster\obj\Debug\net7.0\heroes Vs Monster.AssemblyInfoInputs.cache
+C:\Users\Adrien\source\repos\heroes Vs Monster\obj\Debug\net7.0\heroes Vs Monster.AssemblyInfo.cs
+C:\Users\Adrien\source\repos\heroes Vs Monster\obj\Debug\net7.0\heroes Vs Monster.csproj.CoreCompileInputs.cache
+C:\Users\Adrien\source\repos\heroes Vs Monster\obj\Debug\net7.0\heroes Vs Monster.dll
+C:\Users\Adrien\source\repos\heroes Vs Monster\obj\Debug\net7.0\refint\heroes Vs Monster.dll
+C:\Users\Adrien\source\repos\heroes Vs Monster\obj\Debug\net7.0\heroes Vs Monster.pdb
+C:\Users\Adrien\source\repos\heroes Vs Monster\obj\Debug\net7.0\heroes Vs Monster.genruntimeconfig.cache
+C:\Users\Adrien\source\repos\heroes Vs Monster\obj\Debug\net7.0\ref\heroes Vs Monster.dll
