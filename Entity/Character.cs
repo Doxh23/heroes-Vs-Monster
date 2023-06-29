@@ -9,29 +9,43 @@ using System.Xml.Schema;
 
 namespace heroes_Vs_Monster.Entity {
 
-  
-   public  class Character {
-       
-        public string Name;
-        public Stats stats = new Stats();
-        public Inventaire inventaire = new Inventaire();
+
+    public class Character {
+
+        private string name;
+        private Stats stats = new();
+        private Inventaire inventaire = new();
+
+        public string Name {
+            get => name;
+            set => name = value;
+            }
+        public Stats Stats {
+            get => stats;
+            set => stats = value;
+            }
+        public Inventaire Inventaire {
+            get => inventaire;
+            set => inventaire =  value ;
+            }
+
         public Character() {
             statsGeneration();
             }
 
 
         protected virtual void statsGeneration() {
-            stats[StatType.force] = Dice.RandomDices(4 ,4 ,3);
-            stats[StatType.endurance] = Dice.RandomDices(4 ,4 ,3);
+            Stats[StatType.force] = Dice.RandomDices(4 ,4 ,3);
+            Stats[StatType.endurance] = Dice.RandomDices(4 ,4 ,3);
 
-            stats[StatType.hp] = Dice.RandomDices(4 ,4 ,3) + Bonus(StatType.endurance);
-            stats[StatType.vitesse] = Dice.RandomDices(4 ,4 ,3);
+            Stats[StatType.hp] = Dice.RandomDices(4 ,4 ,3) + Bonus(StatType.endurance);
+            Stats[StatType.vitesse] = Dice.RandomDices(4 ,4 ,3);
             }
         public virtual void Attaque(Character E,int nbr) {
             int nbrDice = Dice.RandomDices(nbr ,6 ,nbr);
             int nbrDamage = nbrDice + Bonus(StatType.force);
             nbrDamage = nbrDamage < 0 ? 0 : nbrDamage;
-            E.stats[StatType.hp] -= nbrDamage;
+            E.Stats[StatType.hp] -= nbrDamage;
 
             }
        
@@ -40,13 +54,13 @@ namespace heroes_Vs_Monster.Entity {
         protected int Bonus(StatType t) {
             int bonusHp;
 
-            if ( stats[t] < 5 ) {
+            if ( Stats[t] < 5 ) {
                 bonusHp = -1;
                 }
-            else if ( stats[t] > 5 && stats[t] < 10 ) {
+            else if ( Stats[t] > 5 && Stats[t] < 10 ) {
                 bonusHp = 0;
                 }
-            else if ( stats[t] > 10 && stats[t] < 15 ) {
+            else if ( Stats[t] > 10 && Stats[t] < 15 ) {
                 bonusHp = 1;
                 }
             else {
@@ -59,7 +73,7 @@ namespace heroes_Vs_Monster.Entity {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"name : {Name}");
             for ( int i = 0; i < Enum.GetValues<StatType>().Count(); i++ ) {
-                sb.AppendLine($"{(StatType) i} : {stats[(StatType) i]}");
+                sb.AppendLine($"{(StatType) i} : {Stats[(StatType) i]}");
                 }
             return sb.ToString();
             

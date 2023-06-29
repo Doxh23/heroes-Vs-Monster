@@ -14,15 +14,16 @@ namespace heroes_Vs_Monster.Entity {
         public int lvl = 1;
         public int xp = 1;
         private int yaw;
-
-        public Heroes() {
+        public string Icon;
+        public Heroes(string icon) {
+            Icon = icon;
             }   
         public void LevelUp() {
             yaw = (int)Math.Round(lvl * 2.5 / 1.2);
             if ( yaw <= xp ) {
                 lvl += 1;
                 }
-            xp = xp % yaw;
+            xp %= yaw;
             yaw = (int) Math.Round(lvl * 2.5 / 1.2);
             if ( yaw <= xp ) {
                 LevelUp();
@@ -30,15 +31,15 @@ namespace heroes_Vs_Monster.Entity {
             }
         public void LootAction(Character monster) {
             for ( int i = 0; i < Enum.GetValues<LootType>().Count(); i++ ) {
-                inventaire[(LootType) i] += monster.inventaire[(LootType) i];
-                Console.WriteLine(( $"{(LootType) i} : {inventaire[(LootType) i]}" ));
+                Inventaire[(LootType) i] += monster.Inventaire[(LootType) i];
+                Console.WriteLine(( $"{(LootType) i} : {Inventaire[(LootType) i]}" ));
                 }
             }
         public void RaiseLootAction(Character monster) {
             LootEvent?.Invoke(monster);
             }
         public void HealAction(Character hero) {
-            stats[StatType.hp] += Dice.RandomDices(1 ,4 ,1);
+            Stats[StatType.hp] += Dice.RandomDices(1 ,100 ,1);
             }
         }
     }

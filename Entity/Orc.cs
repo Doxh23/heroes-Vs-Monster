@@ -11,8 +11,8 @@ namespace heroes_Vs_Monster.Entity {
         
         public Orc() {
             base.statsGeneration();
-            stats[StatType.force] += 4;
-            inventaire.Loots[LootType.or] = Dice.RandomDices(1 ,4 ,1);
+            Stats[StatType.force] += 4;
+            Inventaire.Loots[LootType.or] = Dice.RandomDices(1 ,4 ,1);
             Name = "orc";
             }
         }

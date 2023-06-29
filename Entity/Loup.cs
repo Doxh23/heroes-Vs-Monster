@@ -13,8 +13,8 @@ namespace heroes_Vs_Monster.Entity {
             }
         public Loup() {
             base.statsGeneration();
-            stats[StatType.vitesse] += 5;
-            inventaire.Loots[LootType.cuir] = Dice.RandomDices(1 ,4 ,1);
+            Stats[StatType.vitesse] += 5;
+            Inventaire.Loots[LootType.cuir] = Dice.RandomDices(1 ,4 ,1);
             Name = "loup";
             }
         

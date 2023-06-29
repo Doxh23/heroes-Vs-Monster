@@ -7,13 +7,12 @@ namespace heroes_Vs_Monster {
     public class Game {
         public bool isAlive = true;
         public string m;
-        Heroes hero = new Human("Dante");
-        List<Character> monsters = new List<Character>();
+        public Heroes hero = new Human("dante" ,"#");
 
         public Game() {
             /// TODO moment de rencontre avec un monstre
-            Heroes hero = new Human("dante");
 
+            Console.CursorVisible = false;
             Board.InitBoard(hero);
             int moveX = Board.HeroPositionX;
             int moveY = Board.HeroPositionY;
@@ -45,12 +44,14 @@ namespace heroes_Vs_Monster {
                     break;
 
                     default:
-                    break;
+                    continue;
+                  
                     }
+
                 isAlive =Rencontre(hero);
                 Board.UpdateBoard(hero);
-                Console.SetCursorPosition(moveX ,moveY);
-                Console.Write("@");
+                Board.SetHeroPosition(hero,moveX,moveY);
+               
 
 
                 }
@@ -107,7 +108,7 @@ namespace heroes_Vs_Monster {
 
         private void getLoot(Heroes hero) {
             int nbr = new Random().Next(2);
-            hero.inventaire[(LootType) nbr] += 2;
+            hero.Inventaire[(LootType) nbr] += 2;
             }
 
         public bool CombatAleatoire() {
@@ -118,23 +119,29 @@ namespace heroes_Vs_Monster {
             hero.LootEvent += hero.LootAction;
 
             do {
-
-               int rps = Nav.NavList(10  ,5 ,Board.y-5);
-                Console.WriteLine(rps);
+                Utils.LogCombat(hero ,monster);
+                int rps = Nav.NavList(10  ,5 ,Board.y-5);
                 switch ( rps ) {
+                    
                     case 0:
                         hero.Attaque(monster ,1);
                     break;
-                    }
-                if ( monster.stats[StatType.hp] <= 0 ) {
+                    default:
+                    continue;
+                  
                     
+                    }
+                if ( monster.Stats[StatType.hp] <= 0 ) {
+                    hero.RaiseLootAction(monster);
+                    hero.LootEvent -= hero.HealAction;
+                    hero.LootEvent -= hero.LootAction;
                     return true;
                     }
                 monster.Attaque(hero ,1);
-                if ( hero.stats[StatType.hp] <= 0 ) {
+                if ( hero.Stats[StatType.hp] <= 0 ) {
                     return false;
                     }
-                Utils.LogCombat(hero,monster);
+                
                 }
             while ( true );
 
