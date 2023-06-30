@@ -1,4 +1,5 @@
-﻿using System;
+﻿using heroes_Vs_Monster.board;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -11,30 +12,33 @@ namespace heroes_Vs_Monster.utils {
             attaque,defense,heal,fuir
             }
         public static int NavList(int distance ,int x = 0 ,int y = 0) {
-            Console.SetCursorPosition(x ,y);
             int element = Enum.GetValues(typeof(ActionP)).Length;
             int moveX = x;
             int moveY = y;
-            displayNavList(x,y,distance,element);
+            DisplayNavList(x ,y ,distance ,element ,( ( moveX - x ) / distance ));
             do {
-                ConsoleKeyInfo consoleKeyInfo = Console.ReadKey();
+                ConsoleKeyInfo consoleKeyInfo = Console.ReadKey(true);
                 switch ( consoleKeyInfo.Key ) {
                     case ConsoleKey.LeftArrow:
                     if ( moveX-distance < x ) {
-                        moveX = distance * element+x;
+                        moveX = distance * (element-1)+x;
                         }
                     else {
                         moveX -= ( distance );
                         }
+                    DisplayNavList(x ,y ,distance ,element,(( moveX - x ) / distance));
+
                     break;
                     case ConsoleKey.RightArrow:
 
-                    if ( moveX+element > x+ distance*element  ) {
+                    if ( moveX+element > x+ distance*(element-1)  ) {
                         moveX = x;
                         }
                     else {
                         moveX += ( distance );
                         }
+                    DisplayNavList(x ,y ,distance ,element,( moveX - x ) / distance);
+
                     break;
                     case ConsoleKey.Spacebar:
                     return ( (moveX-x) / distance );
@@ -46,16 +50,22 @@ namespace heroes_Vs_Monster.utils {
                 } while ( true );
             }
 
-        private static void displayNavList(int x, int y,int distance,int element) {
-            StringBuilder sb = new StringBuilder();
+        private static void DisplayNavList(int x, int y,int distance,int element,int rps) {
+            Console.SetCursorPosition(x ,y);
+          
+            
             for ( int i = 0; i < element; i++ ) {
-                sb.Append((ActionP)i);
-                int whiteSpace = Utils.diffMaxCharacter(( (ActionP) i ).ToString(),distance);
+                if ( i == rps ) {
+                    Board.SetColor(Board.SelectBackground ,Board.selectFontColor);
+                    }
+                Console.Write((ActionP)i);
+                Board.SetColor(Board.BasicBackground ,Board.fontColor);
+                int whiteSpace = Utils.DiffMaxCharacter(( (ActionP) i ).ToString(),distance);
                 for(int  j = 0; j < whiteSpace; j++ ) {
-                    sb.Append(" ");
+                    Console.Write(" ");
                     }
                 }
-            Console.Write(sb.ToString());
+            
 
 
             }

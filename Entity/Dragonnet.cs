@@ -10,9 +10,9 @@ namespace heroes_Vs_Monster.Entity {
     public class Dragonnet: Character {
         public Dragonnet() {
             base.statsGeneration();
-            stats[StatType.hp] += 15;
-            inventaire.Loots[LootType.or] = Dice.RandomDices(1 ,4 ,1);
-            inventaire.Loots[LootType.cuir] = Dice.RandomDices(1 ,4 ,1);
+            Stats[StatType.hp] += 15;
+            Inventaire.Loots[LootType.or] = Dice.RandomDices(1 ,4 ,1);
+            Inventaire.Loots[LootType.cuir] = Dice.RandomDices(1 ,4 ,1);
             Name = "dragonnet";
             }
         }

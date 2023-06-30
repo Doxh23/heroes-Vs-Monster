@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace heroes_Vs_Monster.utils {
     public static class Utils {
-
-        public static int diffMaxCharacter(string s ,int max) {
+        
+        public static int DiffMaxCharacter(string s ,int max) {
             return max - s.Length;
             }
         public static void LogCombat(Character hero ,Character monster) {
@@ -23,7 +23,7 @@ namespace heroes_Vs_Monster.utils {
             Console.SetCursorPosition(Board.x - 28 ,y - 7);
             Console.Write($"--------------");
             Console.SetCursorPosition(Board.x - 28 ,y - 6);
-            Console.Write($"hp  :   {hero.stats[StatType.hp]}");
+            Console.Write($"hp  :   {hero.Stats[StatType.hp]}");
             Console.SetCursorPosition(Board.x - 28 ,y - 5);
             Console.Write($"-------------------");
             Console.SetCursorPosition(Board.x - 28 ,y - 4);
@@ -31,12 +31,12 @@ namespace heroes_Vs_Monster.utils {
             Console.SetCursorPosition(Board.x - 28 ,y - 3);
             Console.Write($"--------------");
             Console.SetCursorPosition(Board.x - 28 ,y - 2);
-            Console.Write($"hp  :   {monster.stats[StatType.hp]}");
+            Console.Write($"hp  :   {monster.Stats[StatType.hp]}");
 
 
 
             }
-        public static void LogCombatReset() {
+        public static void LogCombatReset() { // peut etre transformer pour reset la partie que j'ai envie
             int x = Board.bottomInformationX + 3;
             int y = Board.bottomInformationY;
             for ( int i = 0; i < 8; i++ ) {

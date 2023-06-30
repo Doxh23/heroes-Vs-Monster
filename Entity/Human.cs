@@ -8,13 +8,13 @@ using heroes_Vs_Monster.utils;
 namespace heroes_Vs_Monster.Entity {
     public class Human:Heroes {
 
-        public Human(string name)  {
+        public Human(string name,string icon): base(icon)  {
             Name = name;
             }
        
         protected override void statsGeneration() {
             base.statsGeneration();
-            stats[StatType.hp] += +99;
+            Stats[StatType.hp] += +99;
             }
         }
 

@@ -14,7 +14,7 @@ namespace heroes_Vs_Monster.Item {
         public Inventaire() {
             }
 
-        public Dictionary<LootType ,int> Loots = new Dictionary<LootType ,int>();
+        public Dictionary<LootType ,int> Loots = new();
 
         public int this[LootType type] {
             get {

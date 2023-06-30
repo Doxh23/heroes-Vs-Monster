@@ -6,14 +6,14 @@ using heroes_Vs_Monster.utils;
 /// 
 namespace heroes_Vs_Monster.Entity {
     public class Dwarf:Heroes {
-        public string Name;
+        
 
-        public Dwarf(string name) : base() {
+        public Dwarf(string name,string icon) : base(icon) {
         Name =name;
             }
         protected override void statsGeneration() {
             base.statsGeneration();
-            stats[StatType.force] += 2;
+            Stats[StatType.force] += 2;
             
             }
 

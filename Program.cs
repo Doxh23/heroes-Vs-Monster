@@ -8,3 +8,5 @@ Console.CursorVisible = false;
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 Game b =  new Game();
 
+// ecran pour voir quel stats augmenter apres un level up
+//
