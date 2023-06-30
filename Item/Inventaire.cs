@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace heroes_Vs_Monster.Item {
-    public enum LootType {
-        cuir, or
-        }
+namespace heroes_Vs_Monster.Item
+    {
     public class Inventaire {
        
 

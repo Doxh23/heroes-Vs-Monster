@@ -6,7 +6,7 @@ using heroes_Vs_Monster.Item;
 namespace heroes_Vs_Monster.board {
     static class Board {
         static public int x = 140;
-        static public int y = 50;
+        static public int y = 40;
         static private int yPositionForStat = 4;
         static private int xPositionForStat = x - 28;
         static private int xPositionForItem = x - 28;
@@ -33,7 +33,6 @@ namespace heroes_Vs_Monster.board {
             BaseBoard();
 
             UpdateStats(hero);
-          
 
             UpdateLoots(hero);
             SetHeroPosition(hero ,HeroPositionX ,HeroPositionY);
@@ -50,7 +49,6 @@ namespace heroes_Vs_Monster.board {
 
                 }
             }
-
         private static void UpdateStats(Heroes? hero) {
 
             for ( int i = 0; i < Enum.GetValues(typeof(StatType)).Length * 2; i++ ) {
