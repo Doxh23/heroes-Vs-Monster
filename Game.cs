@@ -116,9 +116,7 @@ namespace heroes_Vs_Monster {
             
             Monster monster = Utils.generateMonster(hero);
             // changer l'action vers le monde die event etc
-            hero.LootEvent += hero.HealAction;
-            hero.LootEvent += hero.LootAction;
-            hero.LootEvent += hero.grantXp;
+           
 
             do {
                 Utils.LogCombat(hero ,monster);
@@ -135,9 +133,7 @@ namespace heroes_Vs_Monster {
                     }
                 // a changer car a gerer dans le character et l'attaque
                 if ( monster.hp <= 0 ) {
-                    hero.RaiseLootAction(monster);
-                    hero.LootEvent -= hero.HealAction;
-                    hero.LootEvent -= hero.LootAction;
+               
                     return true;
                     }
                 monster.Attaque(hero ,1);

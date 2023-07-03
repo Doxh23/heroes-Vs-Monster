@@ -16,6 +16,7 @@ namespace heroes_Vs_Monster.Entity {
             //((Lvl+81)-92)*0.02
             }
 
+
         protected abstract void SetupLvl(int LvlHero);
            
        

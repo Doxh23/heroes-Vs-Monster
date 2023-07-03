@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Adrien\\source\\repos\\Doxh23\\heroes-Vs-Monster\\heroes Vs Monster.csproj",
+      "projectUniqueName": "C:\\Users\\Adrien\\source\\repos\\heroes Vs Monster\\heroes Vs Monster.csproj",
       "projectName": "heroes Vs Monster",
-      "projectPath": "C:\\Users\\Adrien\\source\\repos\\Doxh23\\heroes-Vs-Monster\\heroes Vs Monster.csproj",
+      "projectPath": "C:\\Users\\Adrien\\source\\repos\\heroes Vs Monster\\heroes Vs Monster.csproj",
       "packagesPath": "C:\\Users\\Adrien\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Adrien\\source\\repos\\Doxh23\\heroes-Vs-Monster\\obj\\",
+      "outputPath": "C:\\Users\\Adrien\\source\\repos\\heroes Vs Monster\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Adrien\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -61,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

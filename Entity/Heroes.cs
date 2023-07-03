@@ -32,14 +32,14 @@ namespace heroes_Vs_Monster.Entity {
                 LevelUp();
                 }
             }
-        public void LootAction(Character monster) {
+        public void LootAction(Monster monster) {
             for ( int i = 0; i < Enum.GetValues<LootType>().Count(); i++ ) {
                 Inventaire[(LootType) i] += monster.Inventaire[(LootType) i];
                 Console.WriteLine(( $"{(LootType) i} : {Inventaire[(LootType) i]}" ));
                 }
             }
       
-        public void HealAction(Character hero) {
+        public void HealAction(Monster hero) {
             stats[StatType.hp] += Dice.RandomDices(1 ,100 ,1);
             }
         }

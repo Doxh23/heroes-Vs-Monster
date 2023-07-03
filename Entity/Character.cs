@@ -15,7 +15,7 @@ namespace heroes_Vs_Monster.Entity {
         private string name;
         protected Stats stats;
         private Inventaire inventaire = new();
-        public event Action<Character> LootEvent;
+        public event Action<Monster> LootEvent;
 
         public bool IsAlive {
             get {
@@ -64,13 +64,13 @@ namespace heroes_Vs_Monster.Entity {
             }
         public virtual void Attaque(Character E,int nbr) {
            
-            E.RaiseLootAction(E);
+            E.RaiseLootAction((Monster) E);
             }
         public void DamageTaken(int nbrDamage) {
             stats[StatType.hp] -= nbrDamage;
             }
 
-        public void RaiseLootAction(Character monster) {
+        public void RaiseLootAction(Monster monster) {
             //lancer celui du monstre pour plus de simplicité?
             LootEvent?.Invoke(monster);
             }

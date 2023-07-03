@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace heroes_Vs_Monster.db.Moves
     {
-    internal class Moves
-        {
+    internal class Moves {
 
-        public List
         }
+         
     }

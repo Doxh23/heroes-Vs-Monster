@@ -12,13 +12,12 @@ namespace heroes_Vs_Monster.db.Moves
         public int damage;
         public string name;
         public string description;
-        public EnumType type;
 
-        public Move(int damage, string name, string description,)
+        public Move(int damage, string name, string description)
             {
             this.damage = damage;
             this.name = name;
             this.description = description;
-            this}
+            }
         }
     }

@@ -46,6 +46,7 @@ namespace heroes_Vs_Monster.utils {
                 }
             }
         public static Monster? generateMonster(Heroes hero) {
+
             int nbr = new Random().Next(1 ,10);
             Monster? character = null;
             switch ( nbr ) {
@@ -68,6 +69,9 @@ namespace heroes_Vs_Monster.utils {
                 break;
 
                 }
+            character.DieEvent += hero.HealAction;
+            character.DieEvent +=hero.LootAction;
+            character.DieEvent += hero.grantXp;// a revoir
             return character;
 
 
