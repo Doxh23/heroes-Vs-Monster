@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 
 namespace heroes_Vs_Monster.Entity {
     public class Heroes : Character {
-        public event Action<Character> LootEvent;
-        public event Action<Character> HealEvent;
+        public event Action<Monster> HealEvent;
         public int lvl = 1;
         public int xp = 1;
         private int yaw;
@@ -18,13 +17,17 @@ namespace heroes_Vs_Monster.Entity {
         public Heroes(string icon) {
             Icon = icon;
             }   
+        public void grantXp(Monster monster) {
+            xp += monster.GrantXp;
+            LevelUp();
+            }
         public void LevelUp() {
-            yaw = (int)Math.Round(lvl * 2.5 / 1.2);
+            yaw = (int) Math.Round((double) ( 25 * lvl * ( 1 + lvl ) ));
             if ( yaw <= xp ) {
                 lvl += 1;
                 }
             xp %= yaw;
-            yaw = (int) Math.Round(lvl * 2.5 / 1.2);
+            yaw = (int) Math.Round((double) ( 25 * lvl * ( 1 + lvl ) ));
             if ( yaw <= xp ) {
                 LevelUp();
                 }
@@ -35,11 +38,9 @@ namespace heroes_Vs_Monster.Entity {
                 Console.WriteLine(( $"{(LootType) i} : {Inventaire[(LootType) i]}" ));
                 }
             }
-        public void RaiseLootAction(Character monster) {
-            LootEvent?.Invoke(monster);
-            }
+      
         public void HealAction(Character hero) {
-            Stats[StatType.hp] += Dice.RandomDices(1 ,100 ,1);
+            stats[StatType.hp] += Dice.RandomDices(1 ,100 ,1);
             }
         }
     }

@@ -16,14 +16,13 @@ namespace heroes_Vs_Monster.utils {
             }
         public static void LogCombat(Character hero ,Character monster) {
             LogCombatReset();
-            int x = Board.bottomInformationX + 4;
             int y = Board.bottomInformationY+2;
             Console.SetCursorPosition(Board.x - 28 ,y - 8);
             Console.Write($"{hero.Name}");
             Console.SetCursorPosition(Board.x - 28 ,y - 7);
             Console.Write($"--------------");
             Console.SetCursorPosition(Board.x - 28 ,y - 6);
-            Console.Write($"hp  :   {hero.Stats[StatType.hp]}");
+            Console.Write($"hp  :   {hero.hp}");
             Console.SetCursorPosition(Board.x - 28 ,y - 5);
             Console.Write($"-------------------");
             Console.SetCursorPosition(Board.x - 28 ,y - 4);
@@ -31,7 +30,7 @@ namespace heroes_Vs_Monster.utils {
             Console.SetCursorPosition(Board.x - 28 ,y - 3);
             Console.Write($"--------------");
             Console.SetCursorPosition(Board.x - 28 ,y - 2);
-            Console.Write($"hp  :   {monster.Stats[StatType.hp]}");
+            Console.Write($"hp  :   {monster.hp}");
 
 
 
@@ -46,26 +45,26 @@ namespace heroes_Vs_Monster.utils {
                     }
                 }
             }
-        public static Character? generateMonster() {
+        public static Monster? generateMonster(Heroes hero) {
             int nbr = new Random().Next(1 ,10);
-            Character? character = null;
+            Monster? character = null;
             switch ( nbr ) {
                 case 1:
                 case 2:
                 case 3:
                 case 4:
 
-                character = new Loup();
+                character = new Loup(hero.lvl);
                 break;
                 case 5:
                 case 6:
                 case 7:
 
-                character = new Orc();
+                character = new Orc(hero.lvl);
                 break;
                 case 8:
                 case 9:
-                character = new Dragonnet();
+                character = new Dragonnet(hero.lvl);
                 break;
 
                 }

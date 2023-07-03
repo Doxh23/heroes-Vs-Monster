@@ -13,67 +13,75 @@ namespace heroes_Vs_Monster.Entity {
     public class Character {
 
         private string name;
-        private Stats stats = new();
+        protected Stats stats;
         private Inventaire inventaire = new();
+        public event Action<Character> LootEvent;
 
+        public bool IsAlive {
+            get {
+                return hp <= 0; 
+                }
+            }
+        private int _currentHp;
+        public int currentHp {
+            get {
+                return hp;
+                }
+            set {
+                _currentHp = _currentHp < 0 ? 0 : value
+                }
+            }
         public string Name {
             get => name;
             set => name = value;
             }
-        public Stats Stats {
-            get => stats;
-            set => stats = value;
-            }
+            
         public Inventaire Inventaire {
             get => inventaire;
             set => inventaire =  value ;
             }
+        public int hp => getValueStat(StatType.hp);
+        public int force => getValueStat(StatType.force);
+
+        public int endurance => getValueStat(StatType.endurance);
+
+        public int vitesse => getValueStat(StatType.vitesse);
 
         public Character() {
-            statsGeneration();
+            stats = new Stats();
+            // verifier les enfants pour les stats 
+            // protected value pour stats mais faire des methode pour aller chercher les stats
             }
 
-
+        public int getValueStat(StatType stat) {
+            return stats[stat];
+            }
+        public void setValueStat(StatType stat, int nbr) {
+            stats[stat] += nbr;
+            }
         protected virtual void statsGeneration() {
-            Stats[StatType.force] = Dice.RandomDices(4 ,4 ,3);
-            Stats[StatType.endurance] = Dice.RandomDices(4 ,4 ,3);
-
-            Stats[StatType.hp] = Dice.RandomDices(4 ,4 ,3) + Bonus(StatType.endurance);
-            Stats[StatType.vitesse] = Dice.RandomDices(4 ,4 ,3);
+           
             }
         public virtual void Attaque(Character E,int nbr) {
-            int nbrDice = Dice.RandomDices(nbr ,6 ,nbr);
-            int nbrDamage = nbrDice + Bonus(StatType.force);
-            nbrDamage = nbrDamage < 0 ? 0 : nbrDamage;
-            E.Stats[StatType.hp] -= nbrDamage;
-
+           
+            E.RaiseLootAction(E);
             }
-       
-
-
-        protected int Bonus(StatType t) {
-            int bonusHp;
-
-            if ( Stats[t] < 5 ) {
-                bonusHp = -1;
-                }
-            else if ( Stats[t] > 5 && Stats[t] < 10 ) {
-                bonusHp = 0;
-                }
-            else if ( Stats[t] > 10 && Stats[t] < 15 ) {
-                bonusHp = 1;
-                }
-            else {
-                bonusHp = 2;
-                }
-            return bonusHp;
+        public void DamageTaken(int nbrDamage) {
+            stats[StatType.hp] -= nbrDamage;
             }
+
+        public void RaiseLootAction(Character monster) {
+            //lancer celui du monstre pour plus de simplicité?
+            LootEvent?.Invoke(monster);
+            }
+
+
 
         public override string ToString() {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"name : {Name}");
             for ( int i = 0; i < Enum.GetValues<StatType>().Count(); i++ ) {
-                sb.AppendLine($"{(StatType) i} : {Stats[(StatType) i]}");
+                sb.AppendLine($"{(StatType) i} : {stats[(StatType) i]}");
                 }
             return sb.ToString();
             

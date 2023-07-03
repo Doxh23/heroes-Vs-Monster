@@ -4,19 +4,19 @@ using heroes_Vs_Monster.utils;
 /// Summary description for Class1
 /// </summary>
 /// 
-
 namespace heroes_Vs_Monster.Entity {
-    public class Human:Heroes {
+    public class Guerrier:Heroes {
+        
 
-        public Human(string name,string icon): base(icon)  {
-            Name = name;
+        public Guerrier(string name,string icon) : base(icon) {
+        Name =name;
             }
-       
         protected override void statsGeneration() {
             base.statsGeneration();
-            Stats[StatType.hp] += +99;
+            stats[StatType.force] += 2;
+            
             }
-        }
 
+        }
     }
 

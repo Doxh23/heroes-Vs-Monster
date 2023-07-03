@@ -7,7 +7,7 @@ namespace heroes_Vs_Monster {
     public class Game {
         public bool isAlive = true;
         public string m;
-        public Heroes hero = new Human("dante" ,"#");
+        public Heroes hero = new Voleur("dante" ,"#");
 
         public Game() {
             /// TODO moment de rencontre avec un monstre
@@ -17,6 +17,7 @@ namespace heroes_Vs_Monster {
             int moveX = Board.HeroPositionX;
             int moveY = Board.HeroPositionY;
             Console.SetCursorPosition(moveX ,moveY);
+      
             while ( isAlive ) {
 
                 ConsoleKeyInfo k = Console.ReadKey(true);
@@ -81,7 +82,7 @@ namespace heroes_Vs_Monster {
 
 
             }
-
+    
         private bool Rencontre(Heroes hero) {
             int nbr = new Random().Next(10);
             switch ( nbr ) {
@@ -113,10 +114,11 @@ namespace heroes_Vs_Monster {
 
         public bool CombatAleatoire() {
             
-            Character monster = Utils.generateMonster();
+            Monster monster = Utils.generateMonster(hero);
 
             hero.LootEvent += hero.HealAction;
             hero.LootEvent += hero.LootAction;
+            hero.LootEvent += hero.grantXp;
 
             do {
                 Utils.LogCombat(hero ,monster);
@@ -131,14 +133,15 @@ namespace heroes_Vs_Monster {
                   
                     
                     }
-                if ( monster.Stats[StatType.hp] <= 0 ) {
+                // a changer car a gerer dans le character et l'attaque
+                if ( monster.hp <= 0 ) {
                     hero.RaiseLootAction(monster);
                     hero.LootEvent -= hero.HealAction;
                     hero.LootEvent -= hero.LootAction;
                     return true;
                     }
                 monster.Attaque(hero ,1);
-                if ( hero.Stats[StatType.hp] <= 0 ) {
+                if ( hero.hp <= 0 ) {
                     return false;
                     }
                 

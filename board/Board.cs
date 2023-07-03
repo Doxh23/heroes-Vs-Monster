@@ -17,6 +17,7 @@ namespace heroes_Vs_Monster.board {
             } = ( y - 11 ) / 2;
 
         static public int bottomInformationY = y - 2;
+        static public int bottomPositionY = y - 10;
         static public int bottomInformationX = x - 32;
         static public int logPositionY = ( y - 10 ) / 2;
         public static ConsoleColor BasicBackground = ConsoleColor.Blue;
@@ -37,6 +38,7 @@ namespace heroes_Vs_Monster.board {
 
             UpdateLoots(hero);
             SetHeroPosition(hero ,HeroPositionX ,HeroPositionY);
+            resetGameBoard();
             }
 
         private static void UpdateLoots(Heroes? hero) {
@@ -52,12 +54,12 @@ namespace heroes_Vs_Monster.board {
             }
 
         private static void UpdateStats(Heroes? hero) {
-
+            // a voir avec stats dans character
             for ( int i = 0; i < Enum.GetValues(typeof(StatType)).Length * 2; i++ ) {
                 Console.SetCursorPosition(xPositionForStat ,yPositionForStat + i);
 
                 if ( i % 2 == 0 ) {
-                    Console.Write($" {(StatType) ( i / 2 )}  :{hero?.Stats[(StatType) ( i / 2 )]}");
+                    Console.Write($" {(StatType) ( i / 2 )}  :{hero?.getValueStat((StatType) ( i / 2 ))} ");
 
                     }
 
@@ -70,7 +72,19 @@ namespace heroes_Vs_Monster.board {
             Console.SetCursorPosition(HeroPositionX ,HeroPositionY);
             Console.Write(Hero.Icon);
             }
+       static public void resetGameBoard() {
+            for ( int i = 0; i < y; i++ ) {
 
+                for ( int b = 0; b < x - 1; b++ ) {
+                    Console.SetCursorPosition(b ,i);
+
+                    if ( b > 0 && i > 0 && b < bottomInformationX && i < bottomPositionY )
+
+                        Console.Write("f");
+                    }
+
+                    }
+                }
         public static void BaseBoard() {
             Console.SetCursorPosition(0 ,0);
             StringBuilder sb = new StringBuilder();
@@ -103,6 +117,10 @@ namespace heroes_Vs_Monster.board {
             Utils.LogCombatReset();
 
             }
+        public static void displayAscii(string ascii) {
+
+            }
+
         public static void SetColor(ConsoleColor background ,ConsoleColor font) {
 
             Console.ForegroundColor = font;
