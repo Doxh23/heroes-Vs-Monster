@@ -8,10 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace heroes_Vs_Monster {
-    public enum StatType {
-        hp,force,endurance,vitesse
-        }
+namespace heroes_Vs_Monster
+    {
     public class Stats {
 
 
