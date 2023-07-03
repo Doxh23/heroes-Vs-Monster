@@ -28,7 +28,7 @@ namespace heroes_Vs_Monster.Entity {
                 return hp;
                 }
             set {
-                _currentHp = _currentHp < 0 ? 0 : value
+                _currentHp = _currentHp < 0 ? 0 : value;
                 }
             }
         public string Name {

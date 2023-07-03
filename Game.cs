@@ -115,7 +115,7 @@ namespace heroes_Vs_Monster {
         public bool CombatAleatoire() {
             
             Monster monster = Utils.generateMonster(hero);
-
+            // changer l'action vers le monde die event etc
             hero.LootEvent += hero.HealAction;
             hero.LootEvent += hero.LootAction;
             hero.LootEvent += hero.grantXp;

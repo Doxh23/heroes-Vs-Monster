@@ -5,6 +5,8 @@ using heroes_Vs_Monster.Item;
 
 namespace heroes_Vs_Monster.board {
     static class Board {
+
+        // faire classe qui permet de modifier une cellule
         static public int x = 140;
         static public int y = 50;
         static private int yPositionForStat = 4;
