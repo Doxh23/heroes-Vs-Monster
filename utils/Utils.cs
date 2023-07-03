@@ -71,7 +71,7 @@ namespace heroes_Vs_Monster.utils {
                 }
             character.DieEvent += hero.HealAction;
             character.DieEvent +=hero.LootAction;
-            character.DieEvent += hero.grantXp;// a revoir
+            //character.DieEvent += hero.grantXp;// a revoir
             return character;
 
 
