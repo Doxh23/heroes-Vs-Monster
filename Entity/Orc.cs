@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace heroes_Vs_Monster.Entity {
     public class Orc:Monster {
         
-        public Orc(int lvlhero) : base(lvlhero) {
+        public Orc(int lvlhero,string ascii) : base(lvlhero ,ascii) {
             base.statsGeneration();
             stats[StatType.force] += 4;
             Inventaire.Loots[LootType.or] = Dice.RandomDices(1 ,4 ,1);
@@ -22,6 +22,13 @@ namespace heroes_Vs_Monster.Entity {
                stats[(StatType) nbr] += 2;
 
                 }
+            }
+       
+        public override void Attaque(Character monster ,int nbr) {
+            int nbrDice = Dice.RandomDices(nbr ,4 ,nbr);
+            int nbrDamage = ( nbrDice + stats.Bonus(StatType.force) );
+            nbrDamage = nbrDamage < 0 ? 0 : nbrDamage;
+            monster.DamageTaken(nbrDamage);
             }
         }
     }

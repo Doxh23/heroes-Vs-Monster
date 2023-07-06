@@ -17,8 +17,9 @@ namespace heroes_Vs_Monster
         public Dictionary<StatType ,int> Stat = new Dictionary<StatType ,int>();
 
         public Stats() {
-        
-            
+            GenerateStats();
+
+
             }
 
         public int this[StatType stat] {

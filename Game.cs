@@ -7,7 +7,7 @@ namespace heroes_Vs_Monster {
     public class Game {
         public bool isAlive = true;
         public string m;
-        public Heroes hero = new Voleur("dante" ,"#");
+        public Heroes hero = new Voleur("dante" ,"😂");
 
         public Game() {
             /// TODO moment de rencontre avec un monstre
@@ -116,7 +116,7 @@ namespace heroes_Vs_Monster {
             
             Monster monster = Utils.generateMonster(hero);
             // changer l'action vers le monde die event etc
-           
+            Board.displayAscii(monster.AsciiArt);
 
             do {
                 Utils.LogCombat(hero ,monster);
@@ -132,12 +132,12 @@ namespace heroes_Vs_Monster {
                     
                     }
                 // a changer car a gerer dans le character et l'attaque
-                if ( monster.hp <= 0 ) {
+                if ( monster.currentHp <= 0 ) {
                
                     return true;
                     }
                 monster.Attaque(hero ,1);
-                if ( hero.hp <= 0 ) {
+                if ( hero.currentHp <= 0 ) {
                     return false;
                     }
                 

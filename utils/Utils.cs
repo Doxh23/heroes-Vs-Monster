@@ -3,6 +3,7 @@ using heroes_Vs_Monster.Entity;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -22,7 +23,7 @@ namespace heroes_Vs_Monster.utils {
             Console.SetCursorPosition(Board.x - 28 ,y - 7);
             Console.Write($"--------------");
             Console.SetCursorPosition(Board.x - 28 ,y - 6);
-            Console.Write($"hp  :   {hero.hp}");
+            Console.Write($"hp  :   {hero.currentHp}");
             Console.SetCursorPosition(Board.x - 28 ,y - 5);
             Console.Write($"-------------------");
             Console.SetCursorPosition(Board.x - 28 ,y - 4);
@@ -30,18 +31,27 @@ namespace heroes_Vs_Monster.utils {
             Console.SetCursorPosition(Board.x - 28 ,y - 3);
             Console.Write($"--------------");
             Console.SetCursorPosition(Board.x - 28 ,y - 2);
-            Console.Write($"hp  :   {monster.hp}");
+            Console.Write($"hp  :   {monster.currentHp}");
 
 
 
             }
         public static void LogCombatReset() { // peut etre transformer pour reset la partie que j'ai envie
-            int x = Board.bottomInformationX + 3;
+            int x = Board.LeftSideX + 3;
             int y = Board.bottomInformationY;
             for ( int i = 0; i < 8; i++ ) {
                 Console.SetCursorPosition(x ,y - i);
                 for ( int j = 0; j < Board.x - x - 2; j++ ) {
                     Console.Write(" ");
+                    }
+                }
+            }
+        public static void sleep(int timerTicks) {
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            while ( true ) {
+                //some other processing to do possible
+                if ( stopwatch.ElapsedTicks >= timerTicks ) {
+                    break;
                     }
                 }
             }
@@ -55,17 +65,17 @@ namespace heroes_Vs_Monster.utils {
                 case 3:
                 case 4:
 
-                character = new Loup(hero.lvl);
+                character = new Loup(hero.lvl,AsciiArt.Loup);
                 break;
                 case 5:
                 case 6:
                 case 7:
 
-                character = new Orc(hero.lvl);
+                character = new Orc(hero.lvl,AsciiArt.orc);
                 break;
                 case 8:
                 case 9:
-                character = new Dragonnet(hero.lvl);
+                character = new Dragonnet(hero.lvl,AsciiArt.dragonnet);
                 break;
 
                 }

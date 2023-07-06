@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace heroes_Vs_Monster.Entity {
     public class Heroes : Character {
-        public event Action<Monster> HealEvent;
         public int lvl = 1;
         public int xp = 1;
         private int yaw;
@@ -32,15 +31,6 @@ namespace heroes_Vs_Monster.Entity {
                 LevelUp();
                 }
             }
-        public void LootAction(Monster monster) {
-            for ( int i = 0; i < Enum.GetValues<LootType>().Count(); i++ ) {
-                Inventaire[(LootType) i] += monster.Inventaire[(LootType) i];
-                Console.WriteLine(( $"{(LootType) i} : {Inventaire[(LootType) i]}" ));
-                }
-            }
-      
-        public void HealAction(Monster hero) {
-            stats[StatType.hp] += Dice.RandomDices(1 ,100 ,1);
-            }
+    
         }
     }

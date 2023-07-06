@@ -2,6 +2,8 @@
 using System.Text;
 using heroes_Vs_Monster.utils;
 using heroes_Vs_Monster.Item;
+using System.Drawing;
+using System.Diagnostics;
 
 namespace heroes_Vs_Monster.board {
     static class Board {
@@ -9,6 +11,8 @@ namespace heroes_Vs_Monster.board {
         // faire classe qui permet de modifier une cellule
         static public int x = 140;
         static public int y = 40;
+        static public int boardX = LeftSideX - 2;
+        static public int boardY = y - 12;
         static private int yPositionForStat = 4;
         static private int xPositionForStat = x - 28;
         static private int xPositionForItem = x - 28;
@@ -19,8 +23,8 @@ namespace heroes_Vs_Monster.board {
             } = ( y - 11 ) / 2;
 
         static public int bottomInformationY = y - 2;
-        static public int bottomPositionY = y - 10;
-        static public int bottomInformationX = x - 32;
+        static public int BottomY = y - 10;
+        static public int LeftSideX = x - 32;
         static public int logPositionY = ( y - 10 ) / 2;
         public static ConsoleColor BasicBackground = ConsoleColor.Blue;
         public static ConsoleColor SelectBackground = ConsoleColor.White;
@@ -39,7 +43,7 @@ namespace heroes_Vs_Monster.board {
 
             UpdateLoots(hero);
             SetHeroPosition(hero ,HeroPositionX ,HeroPositionY);
-            resetGameBoard();
+            resetGameBoard(0);
             }
 
         private static void UpdateLoots(Heroes? hero) {
@@ -53,18 +57,19 @@ namespace heroes_Vs_Monster.board {
 
                 }
             }
-        private static void UpdateStats(Heroes? hero) {
+        private static void UpdateStats(Heroes hero) {
             // a voir avec stats dans character
-            for ( int i = 0; i < Enum.GetValues(typeof(StatType)).Length * 2; i++ ) {
-                Console.SetCursorPosition(xPositionForStat ,yPositionForStat + i);
-
-                if ( i % 2 == 0 ) {
-                    Console.Write($" {(StatType) ( i / 2 )}  :{hero?.getValueStat((StatType) ( i / 2 ))} ");
+            using ( var reader = new StringReader(hero.ToString()) ) {
+                int i = 0;
+                for ( string line = reader.ReadLine(); line != null; line = reader.ReadLine() ) {
+                    Console.SetCursorPosition(xPositionForStat ,yPositionForStat + i);
+                    Console.Write(line.Trim());
+                    i += 2;
 
                     }
-
-
                 }
+
+          
             }
         public static void SetHeroPosition(Heroes Hero ,int x ,int y) {
             HeroPositionX = x;
@@ -72,19 +77,23 @@ namespace heroes_Vs_Monster.board {
             Console.SetCursorPosition(HeroPositionX ,HeroPositionY);
             Console.Write(Hero.Icon);
             }
-       static public void resetGameBoard() {
+       static public  void resetGameBoard(int wait) {
             for ( int i = 0; i < y; i++ ) {
-
                 for ( int b = 0; b < x - 1; b++ ) {
+                    Utils.sleep(wait);
+
                     Console.SetCursorPosition(b ,i);
+                    
+                    if ( b > 0 && i > 0 && b < LeftSideX && i < BottomY )
 
-                    if ( b > 0 && i > 0 && b < bottomInformationX && i < bottomPositionY )
+                        Console.Write(" ");
 
-                        Console.Write("f");
+                            
                     }
 
-                    }
                 }
+
+            }
         public static void BaseBoard() {
             Console.SetCursorPosition(0 ,0);
             StringBuilder sb = new StringBuilder();
@@ -118,6 +127,24 @@ namespace heroes_Vs_Monster.board {
 
             }
         public static void displayAscii(string ascii) {
+            SetColor(ConsoleColor.Black ,fontColor);
+
+            resetGameBoard(1500);
+            int i = 0;
+            using ( var reader = new StringReader(ascii) ) {
+                int height = ( boardY - ascii.Split("\n").Count() ) / 2;
+                
+                for ( string line = reader.ReadLine(); line != null; line = reader.ReadLine() ) {
+                    int centerPosition = (int)Math.Floor((double)( LeftSideX - 2 - line.Length ) / 2);
+                    Utils.sleep(400000);
+
+                    Console.SetCursorPosition(centerPosition ,height + i);
+
+                    Console.Write(line);
+                    i++;
+                    }
+                }
+            SetColor(BasicBackground ,fontColor);
 
             }
 

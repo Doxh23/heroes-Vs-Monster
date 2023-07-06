@@ -15,30 +15,31 @@ namespace heroes_Vs_Monster.Entity {
         private string name;
         protected Stats stats;
         private Inventaire inventaire = new();
-        public event Action<Monster> LootEvent;
+        public Action<Character>? DieEvent;
+
 
         public bool IsAlive {
             get {
-                return hp <= 0; 
+                return hp <= 0;
                 }
             }
         private int _currentHp;
         public int currentHp {
             get {
-                return hp;
+                return _currentHp;
                 }
             set {
-                _currentHp = _currentHp < 0 ? 0 : value;
+                _currentHp = value < 0 ? 0 : value > hp ? hp : value;
                 }
             }
         public string Name {
             get => name;
             set => name = value;
             }
-            
+
         public Inventaire Inventaire {
             get => inventaire;
-            set => inventaire =  value ;
+            set => inventaire = value;
             }
         public int hp => getValueStat(StatType.hp);
         public int force => getValueStat(StatType.force);
@@ -47,51 +48,61 @@ namespace heroes_Vs_Monster.Entity {
 
         public int vitesse => getValueStat(StatType.vitesse);
 
+
+
         public Character() {
             stats = new Stats();
+            stats[StatType.hp] += 155;
+            _currentHp = hp;
             // verifier les enfants pour les stats 
             // protected value pour stats mais faire des methode pour aller chercher les stats
             }
 
-        public int getValueStat(StatType stat) {
+        public virtual int getValueStat(StatType stat) {
             return stats[stat];
             }
-        public void setValueStat(StatType stat, int nbr) {
+        public void setValueStat(StatType stat ,int nbr) {
             stats[stat] += nbr;
             }
         protected virtual void statsGeneration() {
-           
+
             }
-        public virtual void Attaque(Character E,int nbr) {
-           
-            E.RaiseLootAction((Monster) E);
+        public virtual void Attaque(Character target ,int nbr) {
+            if ( target.currentHp <= 0 ) {
+                target.DieEvent?.Invoke(target);
+
+                }
             }
         public void DamageTaken(int nbrDamage) {
-            stats[StatType.hp] -= nbrDamage;
+            currentHp -= nbrDamage;
             }
-
-        public void RaiseLootAction(Monster monster) {
-            //lancer celui du monstre pour plus de simplicité?
-            LootEvent?.Invoke(monster);
-            }
-
-
-
-        public override string ToString() {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"name : {Name}");
-            for ( int i = 0; i < Enum.GetValues<StatType>().Count(); i++ ) {
-                sb.AppendLine($"{(StatType) i} : {stats[(StatType) i]}");
+        public void LootAction(Character character) {
+            for ( int i = 0; i < Enum.GetValues<LootType>().Count(); i++ ) {
+                Inventaire[(LootType) i] += character.Inventaire[(LootType) i];
                 }
-            return sb.ToString();
-            
             }
-        
-        
-      
-        
+
+        public void HealAction(Character character) {
+            currentHp += Dice.RandomDices(1 ,100 ,1);
+            }
+
+
+
+
+        public override string ToString() {// stats a afficher a droite
+            return @$"Hp : {currentHp} / {hp}
+                     Force : {force}
+                     endurance : {endurance}
+                     vitesse : {vitesse}";
+
+
+
+
+
+
+
+
+            }
 
         }
-   
-
-    }
+        }
