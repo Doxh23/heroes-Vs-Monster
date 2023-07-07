@@ -16,6 +16,13 @@ namespace heroes_Vs_Monster.Entity {
             stats[StatType.force] += 2;
             
             }
+        public override void Attaque(Character monster ,int nbr) {
+            int nbrDice = Dice.RandomDices(nbr+1 ,Dice.DiceType.d8 ,nbr);
+            int nbrDamage = ( nbrDice + stats.Bonus(StatType.force) );
+            nbrDamage = nbrDamage < 0 ? 0 : nbrDamage;
+            monster.DamageTaken(nbrDamage);
+            base.Attaque(monster ,nbrDamage);
+            }
 
         }
     }

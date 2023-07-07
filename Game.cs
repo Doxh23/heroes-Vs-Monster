@@ -119,7 +119,7 @@ namespace heroes_Vs_Monster {
             Board.displayAscii(monster.AsciiArt);
 
             do {
-                Utils.LogCombat(hero ,monster);
+                Board.BottomRightSquare(hero ,monster,SquareType.log);
                 int rps = Nav.NavList(10  ,5 ,Board.y-5);
                 switch ( rps ) {
                     

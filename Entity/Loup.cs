@@ -14,7 +14,7 @@ namespace heroes_Vs_Monster.Entity {
         public Loup(int lvlhero,string ascii) : base(lvlhero,ascii) {
             base.statsGeneration();
             stats[StatType.vitesse] += 5;
-            Inventaire.Loots[LootType.cuir] = Dice.RandomDices(1 ,4 ,1);
+            Inventaire.Loots[LootType.cuir] = Dice.RandomDices(1 ,Dice.DiceType.d4 ,1);
             Name = "loup";
             }
         protected override void SetupLvl(int LvlHero) {
@@ -26,7 +26,7 @@ namespace heroes_Vs_Monster.Entity {
                 }
             }
         public override void Attaque(Character monster ,int nbr) {
-            int nbrDice = Dice.RandomDices(nbr ,4 ,nbr);
+            int nbrDice = Dice.RandomDices(nbr ,Dice.DiceType.d4 ,nbr);
             int nbrDamage = ( nbrDice + stats.Bonus(StatType.force) );
             nbrDamage = nbrDamage < 0 ? 0 : nbrDamage;
             monster.DamageTaken(nbrDamage);

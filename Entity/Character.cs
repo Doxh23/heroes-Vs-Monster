@@ -16,6 +16,9 @@ namespace heroes_Vs_Monster.Entity {
         protected Stats stats;
         private Inventaire inventaire = new();
         public Action<Character>? DieEvent;
+        public int lvl = 1;
+        public int xp = 1;
+        public int necessaryXp;
 
 
         public bool IsAlive {
@@ -51,8 +54,8 @@ namespace heroes_Vs_Monster.Entity {
 
 
         public Character() {
-            stats = new Stats();
-            stats[StatType.hp] += 155;
+            necessaryXp = (int) Math.Round((double) ( 25 * lvl * ( 1 + lvl ) ) * 2);
+            stats = new Stats(lvl);
             _currentHp = hp;
             // verifier les enfants pour les stats 
             // protected value pour stats mais faire des methode pour aller chercher les stats
@@ -82,8 +85,11 @@ namespace heroes_Vs_Monster.Entity {
                 }
             }
 
+        public void GrantXpAction(Character character) {
+            
+            }
         public void HealAction(Character character) {
-            currentHp += Dice.RandomDices(1 ,100 ,1);
+            currentHp += Dice.RandomDices(1 ,Dice.DiceType.d6 ,1);
             }
 
 
@@ -92,8 +98,12 @@ namespace heroes_Vs_Monster.Entity {
         public override string ToString() {// stats a afficher a droite
             return @$"Hp : {currentHp} / {hp}
                      Force : {force}
-                     endurance : {endurance}
-                     vitesse : {vitesse}";
+                     Endurance : {endurance}
+                     Vitesse : {vitesse}
+                     xp : {xp} / {necessaryXp}
+                     lvl : {lvl}
+";
+                        
 
 
 

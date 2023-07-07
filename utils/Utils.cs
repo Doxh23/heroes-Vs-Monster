@@ -15,37 +15,8 @@ namespace heroes_Vs_Monster.utils {
         public static int DiffMaxCharacter(string s ,int max) {
             return max - s.Length;
             }
-        public static void LogCombat(Character hero ,Character monster) {
-            LogCombatReset();
-            int y = Board.bottomInformationY+2;
-            Console.SetCursorPosition(Board.x - 28 ,y - 8);
-            Console.Write($"{hero.Name}");
-            Console.SetCursorPosition(Board.x - 28 ,y - 7);
-            Console.Write($"--------------");
-            Console.SetCursorPosition(Board.x - 28 ,y - 6);
-            Console.Write($"hp  :   {hero.currentHp}");
-            Console.SetCursorPosition(Board.x - 28 ,y - 5);
-            Console.Write($"-------------------");
-            Console.SetCursorPosition(Board.x - 28 ,y - 4);
-            Console.Write($"{monster.Name}");
-            Console.SetCursorPosition(Board.x - 28 ,y - 3);
-            Console.Write($"--------------");
-            Console.SetCursorPosition(Board.x - 28 ,y - 2);
-            Console.Write($"hp  :   {monster.currentHp}");
-
-
-
-            }
-        public static void LogCombatReset() { // peut etre transformer pour reset la partie que j'ai envie
-            int x = Board.LeftSideX + 3;
-            int y = Board.bottomInformationY;
-            for ( int i = 0; i < 8; i++ ) {
-                Console.SetCursorPosition(x ,y - i);
-                for ( int j = 0; j < Board.x - x - 2; j++ ) {
-                    Console.Write(" ");
-                    }
-                }
-            }
+       
+      
         public static void sleep(int timerTicks) {
             Stopwatch stopwatch = Stopwatch.StartNew();
             while ( true ) {
@@ -81,6 +52,7 @@ namespace heroes_Vs_Monster.utils {
                 }
             character.DieEvent += hero.HealAction;
             character.DieEvent +=hero.LootAction;
+            character.DieEvent += hero.grantXp;
             //character.DieEvent += hero.grantXp;// a revoir
             return character;
 

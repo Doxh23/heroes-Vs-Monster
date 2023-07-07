@@ -4,20 +4,26 @@ using heroes_Vs_Monster.utils;
 using heroes_Vs_Monster.Item;
 using System.Drawing;
 using System.Diagnostics;
+using System.Threading;
 
 namespace heroes_Vs_Monster.board {
+
+    public enum SquareType {
+        log
+        }
     static class Board {
 
         // faire classe qui permet de modifier une cellule
         static public int x = 140;
         static public int y = 40;
+        static public int SizeRightSide = 32;
         static public int boardX = LeftSideX - 2;
         static public int boardY = y - 12;
         static private int yPositionForStat = 4;
-        static private int xPositionForStat = x - 28;
-        static private int xPositionForItem = x - 28;
+        static private int xPositionForStat = x - SizeRightSide +4;
+        static private int xPositionForItem = x - SizeRightSide +4;
         static private int yPositionForItem;
-        public static int HeroPositionX = ( x - 2 - 32 ) / 2;
+        public static int HeroPositionX = ( x - 2 - SizeRightSide ) / 2;
         public static int HeroPositionY {
             get; private set;
             } = ( y - 11 ) / 2;
@@ -123,8 +129,50 @@ namespace heroes_Vs_Monster.board {
             BaseBoard();
             UpdateLoots(hero);
             UpdateStats(hero);
-            Utils.LogCombatReset();
+            ResetBottomRightSquare();
 
+            }
+        public static void ResetBottomRightSquare() { // peut etre transformer pour reset la partie que j'ai envie
+            int x = LeftSideX + 1;
+            int y = bottomInformationY;
+            for ( int i = 0; i < 8; i++ ) {
+                Console.SetCursorPosition(x ,y - i);
+                for ( int j = 0; j < SizeRightSide-3; j++ ) {
+                    Console.Write(" ");
+                    }
+                }
+            }
+        public static void BottomRightSquare(Character hero ,Character monster,SquareType square) {
+            ResetBottomRightSquare();
+            int y = bottomInformationY + 2;
+
+            switch ( square ) {
+                case SquareType.log:
+                logInfo(hero,monster);
+                break;
+                default:
+                break;
+                }
+            
+
+
+
+            }
+       static private  void logInfo(Character hero,Character monster) {
+            Console.SetCursorPosition(x - 28 ,y - 8);
+            Console.Write($"{hero.Name}");
+            Console.SetCursorPosition(x - 28 ,y - 7);
+            Console.Write($"--------------");
+            Console.SetCursorPosition(x - 28 ,y - 6);
+            Console.Write($"hp  :   {hero.currentHp}");
+            Console.SetCursorPosition(x - 28 ,y - 5);
+            Console.Write($"-------------------");
+            Console.SetCursorPosition(x - 28 ,y - 4);
+            Console.Write($"{monster.Name}");
+            Console.SetCursorPosition(x - 28 ,y - 3);
+            Console.Write($"--------------");
+            Console.SetCursorPosition(x - 28 ,y - 2);
+            Console.Write($"hp  :   {monster.currentHp}");
             }
         public static void displayAscii(string ascii) {
             SetColor(ConsoleColor.Black ,fontColor);

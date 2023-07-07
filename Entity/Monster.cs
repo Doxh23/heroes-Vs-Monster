@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 namespace heroes_Vs_Monster.Entity {
     public abstract class Monster:Character {
         public string AsciiArt ;                
-        protected  int Lvl;
-        public int GrantXp {
-            get;set;
-            }
+        protected  int Lvl = 2;
+       
         public Monster(int lvlHero,string asciiArt) {
             AsciiArt = asciiArt;
         //SetupLvl(lvlHero);
-            GrantXp = ( ( 25 * Lvl ) * ((int)1 + Lvl/4 ) );
+            xp = ( ( 25 * Lvl ) * ((int)1 + Lvl/4 ) );
             //((Lvl+81)-92)*0.02
             }
 

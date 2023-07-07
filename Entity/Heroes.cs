@@ -9,28 +9,32 @@ using System.Threading.Tasks;
 
 namespace heroes_Vs_Monster.Entity {
     public class Heroes : Character {
-        public int lvl = 1;
-        public int xp = 1;
-        private int yaw;
+      
         public string Icon;
         public Heroes(string icon) {
+            stats[StatType.hp] += 10;
             Icon = icon;
+            FullLife();
             }   
-        public void grantXp(Monster monster) {
-            xp += monster.GrantXp;
+        public void grantXp(Character monster) {
+             xp += monster.xp ;
             LevelUp();
             }
         public void LevelUp() {
-            yaw = (int) Math.Round((double) ( 25 * lvl * ( 1 + lvl ) ));
-            if ( yaw <= xp ) {
+            necessaryXp = (int) Math.Round((double) ( 25 * lvl * ( 1 + lvl ) )*2);
+            if ( necessaryXp <= xp ) {
                 lvl += 1;
                 }
-            xp %= yaw;
-            yaw = (int) Math.Round((double) ( 25 * lvl * ( 1 + lvl ) ));
-            if ( yaw <= xp ) {
+            xp %= necessaryXp;
+            necessaryXp = (int) Math.Round((double) ( 25 * lvl * ( 1 + lvl ) )*2);
+            if ( necessaryXp <= xp ) {
                 LevelUp();
                 }
             }
+        public void FullLife() {
+            currentHp = hp;
+            // currentMp = mp;
+            } 
     
         }
     }

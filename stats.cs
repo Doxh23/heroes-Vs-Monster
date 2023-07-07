@@ -16,7 +16,7 @@ namespace heroes_Vs_Monster
 
         public Dictionary<StatType ,int> Stat = new Dictionary<StatType ,int>();
 
-        public Stats() {
+        public Stats(int lvl) {
             GenerateStats();
 
 
@@ -38,29 +38,32 @@ namespace heroes_Vs_Monster
             }
 
         private void GenerateStats() {
-            Stat[StatType.force] = Dice.RandomDices(4 ,4 ,3);
-            Stat[StatType.endurance] = Dice.RandomDices(4 ,4 ,3);
+            Stat[StatType.force] = Dice.RandomDices(4 ,Dice.DiceType.d4 ,3);
+            Stat[StatType.endurance] = Dice.RandomDices(4 ,Dice.DiceType.d4 ,3);
 
-            Stat[StatType.hp] = Dice.RandomDices(4 ,4 ,3) + Bonus(StatType.endurance);
-            Stat[StatType.vitesse] = Dice.RandomDices(4 ,4 ,3);
+            Stat[StatType.hp] = Dice.RandomDices(4 ,Dice.DiceType.d4 ,3) + Bonus(StatType.endurance);
+            Stat[StatType.vitesse] = Dice.RandomDices(4 ,Dice.DiceType.d4 ,3);
+            Stat[StatType.magie] = Dice.RandomDices(4 ,Dice.DiceType.d4 ,3);
+            int r = new Random().Next(Enum.GetValues(typeof(Dice.DiceType)).Length);
+
             }
         public int Bonus(StatType t) {
             // faire un foreach pour calculer les nouvelles stats
-            int bonusHp;
+            int stats;
 
             if ( Stat[t] < 5 ) {
-                bonusHp = -1;
+                stats = -1;
                 }
             else if ( Stat[t] > 5 && Stat[t] < 10 ) {
-                bonusHp = 0;
+                stats = 0;
                 }
             else if ( Stat[t] > 10 && Stat[t] < 15 ) {
-                bonusHp = 1;
+                stats = 1;
                 }
             else {
-                bonusHp = 2;
+                stats = 2;
                 }
-            return bonusHp;
+            return stats;
             }
         }
     }
