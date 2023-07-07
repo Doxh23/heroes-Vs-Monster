@@ -12,8 +12,8 @@ namespace heroes_Vs_Monster.Entity {
         public Dragonnet(int lvlhero,string ascii): base(lvlhero,ascii) {
             base.statsGeneration();
             stats[StatType.hp] += 15;
-            Inventaire.Loots[LootType.or] = Dice.RandomDices(1 ,Dice.DiceType.d4 ,1);
-            Inventaire.Loots[LootType.cuir] = Dice.RandomDices(1 ,Dice.DiceType.d4 ,1);
+            Materiaux[LootType.or] = Dice.RandomDices(1 ,Dice.DiceType.d4 ,1);
+            Materiaux[LootType.cuir] = Dice.RandomDices(1 ,Dice.DiceType.d4 ,1);
             Name = "dragonnet";
 
             }

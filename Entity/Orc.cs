@@ -12,7 +12,7 @@ namespace heroes_Vs_Monster.Entity {
         public Orc(int lvlhero,string ascii) : base(lvlhero ,ascii) {
             base.statsGeneration();
             stats[StatType.force] += 4;
-            Inventaire.Loots[LootType.or] = Dice.RandomDices(1 ,Dice.DiceType.d4 ,1);
+            Materiaux[LootType.or] = Dice.RandomDices(1 ,Dice.DiceType.d4 ,1);
             Name = "orc";
             }
         protected override void SetupLvl(int LvlHero) {

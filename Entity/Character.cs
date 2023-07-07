@@ -14,7 +14,8 @@ namespace heroes_Vs_Monster.Entity {
 
         private string name;
         protected Stats stats;
-        private Inventaire inventaire = new();
+        public materiaux Materiaux = new materiaux();
+        public Equipements equipements = new Equipements();
         public Action<Character>? DieEvent;
         public int lvl = 1;
         public int xp = 1;
@@ -40,28 +41,33 @@ namespace heroes_Vs_Monster.Entity {
             set => name = value;
             }
 
-        public Inventaire Inventaire {
-            get => inventaire;
-            set => inventaire = value;
-            }
+
         public int hp => getValueStat(StatType.hp);
         public int force => getValueStat(StatType.force);
 
         public int endurance => getValueStat(StatType.endurance);
 
         public int vitesse => getValueStat(StatType.vitesse);
+        public int resistance => getValueResistance(StatType.resistance);
+        public int resistanceMagique => getValueResistance(StatType.resistanceMagique);
 
 
 
         public Character() {
             necessaryXp = (int) Math.Round((double) ( 25 * lvl * ( 1 + lvl ) ) * 2);
             stats = new Stats(lvl);
+
             _currentHp = hp;
             // verifier les enfants pour les stats 
             // protected value pour stats mais faire des methode pour aller chercher les stats
             }
 
         public virtual int getValueStat(StatType stat) {
+            return stats[stat];
+            }
+        public virtual int getValueResistance(StatType stat) {
+
+           
             return stats[stat];
             }
         public void setValueStat(StatType stat ,int nbr) {
@@ -81,7 +87,7 @@ namespace heroes_Vs_Monster.Entity {
             }
         public void LootAction(Character character) {
             for ( int i = 0; i < Enum.GetValues<LootType>().Count(); i++ ) {
-                Inventaire[(LootType) i] += character.Inventaire[(LootType) i];
+                Materiaux[(LootType) i] += character.Materiaux[(LootType) i];
                 }
             }
 
@@ -100,6 +106,8 @@ namespace heroes_Vs_Monster.Entity {
                      Force : {force}
                      Endurance : {endurance}
                      Vitesse : {vitesse}
+                     resistance : {resistance}
+                     resi magique : {resistanceMagique}
                      xp : {xp} / {necessaryXp}
                      lvl : {lvl}
 ";

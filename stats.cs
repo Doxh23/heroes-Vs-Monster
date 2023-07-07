@@ -41,10 +41,12 @@ namespace heroes_Vs_Monster
             Stat[StatType.force] = Dice.RandomDices(4 ,Dice.DiceType.d4 ,3);
             Stat[StatType.endurance] = Dice.RandomDices(4 ,Dice.DiceType.d4 ,3);
 
-            Stat[StatType.hp] = Dice.RandomDices(4 ,Dice.DiceType.d4 ,3) + Bonus(StatType.endurance);
+            Stat[StatType.hp] = Dice.RandomDices(4 ,Dice.DiceType.d4 ,3);
             Stat[StatType.vitesse] = Dice.RandomDices(4 ,Dice.DiceType.d4 ,3);
             Stat[StatType.magie] = Dice.RandomDices(4 ,Dice.DiceType.d4 ,3);
-            int r = new Random().Next(Enum.GetValues(typeof(Dice.DiceType)).Length);
+            Stat[StatType.resistance] = Dice.RandomDices(4 ,Dice.DiceType.d20 ,3);
+            Stat[StatType.resistanceMagique] = Dice.RandomDices(4 ,Dice.DiceType.d20 ,3);
+
 
             }
         public int Bonus(StatType t) {

@@ -17,11 +17,11 @@ namespace heroes_Vs_Monster.board {
         static public int x = 140;
         static public int y = 40;
         static public int SizeRightSide = 32;
-        static public int boardX = LeftSideX - 2;
+        static public int boardX = RightSideX - 2;
         static public int boardY = y - 12;
         static private int yPositionForStat = 4;
-        static private int xPositionForStat = x - SizeRightSide +4;
-        static private int xPositionForItem = x - SizeRightSide +4;
+        static private int xPositionForStat = x - SizeRightSide + 4;
+        static private int xPositionForItem = x - SizeRightSide + 4;
         static private int yPositionForItem;
         public static int HeroPositionX = ( x - 2 - SizeRightSide ) / 2;
         public static int HeroPositionY {
@@ -30,9 +30,10 @@ namespace heroes_Vs_Monster.board {
 
         static public int bottomInformationY = y - 2;
         static public int BottomY = y - 10;
-        static public int LeftSideX = x - 32;
+        static public int RightSideX = x - 32;
+        static public int RightSideY = y - 10;
         static public int logPositionY = ( y - 10 ) / 2;
-        public static ConsoleColor BasicBackground = ConsoleColor.Blue;
+        public static ConsoleColor BasicBackground = ConsoleColor.DarkCyan;
         public static ConsoleColor SelectBackground = ConsoleColor.White;
         public static ConsoleColor fontColor = ConsoleColor.White;
         public static ConsoleColor selectFontColor = ConsoleColor.Blue;
@@ -40,11 +41,10 @@ namespace heroes_Vs_Monster.board {
 
         public static void InitBoard(Heroes? hero = null) {
             Console.SetWindowPosition(0 ,0);
-            yPositionForItem = yPositionForStat + Enum.GetValues(typeof(StatType)).Length * 2 + 2;
+            yPositionForItem = yPositionForStat + Enum.GetValues(typeof(StatType)).Length * 2 + 3;
             Console.ResetColor();
             Console.BackgroundColor = BasicBackground;
             BaseBoard();
-
             UpdateStats(hero);
 
             UpdateLoots(hero);
@@ -57,11 +57,18 @@ namespace heroes_Vs_Monster.board {
                 Console.SetCursorPosition(xPositionForItem ,yPositionForItem + i);
 
                 if ( i % 2 == 0 ) {
-                    Console.Write($" {(LootType) ( i / 2 )}  :{hero?.Inventaire[(LootType) ( i / 2 )]}");
+                    Console.Write($"{(LootType) ( i / 2 )}  :{hero?.Materiaux[(LootType) ( i / 2 )]}");
 
                     }
 
                 }
+            }
+        public static void chooseStat() {
+            Console.SetCursorPosition(4 ,boardY / 2);
+            Console.Write("Level Up!!!!");
+            Console.SetCursorPosition(5 ,boardY / 2 + 2);
+            Console.Write("quel stats voulez vous augmenter?");
+
             }
         private static void UpdateStats(Heroes hero) {
             // a voir avec stats dans character
@@ -75,7 +82,7 @@ namespace heroes_Vs_Monster.board {
                     }
                 }
 
-          
+
             }
         public static void SetHeroPosition(Heroes Hero ,int x ,int y) {
             HeroPositionX = x;
@@ -83,18 +90,18 @@ namespace heroes_Vs_Monster.board {
             Console.SetCursorPosition(HeroPositionX ,HeroPositionY);
             Console.Write(Hero.Icon);
             }
-       static public  void resetGameBoard(int wait) {
+        static public void resetGameBoard(int wait) {
             for ( int i = 0; i < y; i++ ) {
                 for ( int b = 0; b < x - 1; b++ ) {
                     Utils.sleep(wait);
 
                     Console.SetCursorPosition(b ,i);
-                    
-                    if ( b > 0 && i > 0 && b < LeftSideX && i < BottomY )
+
+                    if ( b > 0 && i > 0 && b < RightSideX && i < BottomY )
 
                         Console.Write(" ");
 
-                            
+
                     }
 
                 }
@@ -108,7 +115,7 @@ namespace heroes_Vs_Monster.board {
 
                 for ( int b = 0; b < x - 1; b++ ) {
 
-                    if ( ( b == 0 || b == x - 2 || b == x - 32 ) && i != 0 ) {
+                    if ( ( b == 0 || b == x - 2 || b == x - 32 ) && i != 0 || ((b == 35) && i > y-10) ) {
                         sb.Append('|');
                         }
                     else if ( !( b == 0 || b == x - 2 || b == x - 32 ) && ( i == y - 1 || i == 0 || i == y - 10 ) ) {
@@ -129,49 +136,49 @@ namespace heroes_Vs_Monster.board {
             BaseBoard();
             UpdateLoots(hero);
             UpdateStats(hero);
-            ResetBottomRightSquare();
 
             }
-        public static void ResetBottomRightSquare() { // peut etre transformer pour reset la partie que j'ai envie
-            int x = LeftSideX + 1;
-            int y = bottomInformationY;
-            for ( int i = 0; i < 8; i++ ) {
-                Console.SetCursorPosition(x ,y - i);
-                for ( int j = 0; j < SizeRightSide-3; j++ ) {
+        public static void resetBlock(int q ,int y ,int startPositionX ,int StartPositionY) { // peut etre transformer pour reset la partie que j'ai envie
+
+            for ( int i = 0; i < q; i++ ) {
+                Console.SetCursorPosition(RightSideX + 1 ,RightSideY+1+i);
+                for ( int j = 0; j < y; j++ ) {
                     Console.Write(" ");
                     }
                 }
             }
-        public static void BottomRightSquare(Character hero ,Character monster,SquareType square) {
-            ResetBottomRightSquare();
+        public static void BottomRightSquare(Character hero ,Character monster ,SquareType square) {
+
             int y = bottomInformationY + 2;
 
             switch ( square ) {
                 case SquareType.log:
-                logInfo(hero,monster);
+                resetBlock(8 ,SizeRightSide - 3 ,RightSideX - 2 ,yPositionForItem + 5);
+                logInfo(hero ,monster);
                 break;
                 default:
                 break;
                 }
-            
+
 
 
 
             }
-       static private  void logInfo(Character hero,Character monster) {
-            Console.SetCursorPosition(x - 28 ,y - 8);
+
+        static private void logInfo(Character hero ,Character monster) {
+            Console.SetCursorPosition(x - 28 ,RightSideY + 2);
             Console.Write($"{hero.Name}");
-            Console.SetCursorPosition(x - 28 ,y - 7);
+            Console.SetCursorPosition(x - 28 ,RightSideY + 3);
             Console.Write($"--------------");
-            Console.SetCursorPosition(x - 28 ,y - 6);
+            Console.SetCursorPosition(x - 28 ,RightSideY + 4);
             Console.Write($"hp  :   {hero.currentHp}");
-            Console.SetCursorPosition(x - 28 ,y - 5);
+            Console.SetCursorPosition(x - 28 ,RightSideY + 5);
             Console.Write($"-------------------");
-            Console.SetCursorPosition(x - 28 ,y - 4);
+            Console.SetCursorPosition(x - 28 ,RightSideY + 6);
             Console.Write($"{monster.Name}");
-            Console.SetCursorPosition(x - 28 ,y - 3);
+            Console.SetCursorPosition(x - 28 ,RightSideY + 7);
             Console.Write($"--------------");
-            Console.SetCursorPosition(x - 28 ,y - 2);
+            Console.SetCursorPosition(x - 28 ,RightSideY + 8);
             Console.Write($"hp  :   {monster.currentHp}");
             }
         public static void displayAscii(string ascii) {
@@ -181,9 +188,9 @@ namespace heroes_Vs_Monster.board {
             int i = 0;
             using ( var reader = new StringReader(ascii) ) {
                 int height = ( boardY - ascii.Split("\n").Count() ) / 2;
-                
+
                 for ( string line = reader.ReadLine(); line != null; line = reader.ReadLine() ) {
-                    int centerPosition = (int)Math.Floor((double)( LeftSideX - 2 - line.Length ) / 2);
+                    int centerPosition = (int) Math.Floor((double) ( RightSideX - 2 - line.Length ) / 2);
                     Utils.sleep(400000);
 
                     Console.SetCursorPosition(centerPosition ,height + i);
@@ -203,6 +210,6 @@ namespace heroes_Vs_Monster.board {
 
             }
         }
-        }
-  
+    }
+
 

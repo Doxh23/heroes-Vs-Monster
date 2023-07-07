@@ -10,7 +10,8 @@ Game b =  new Game();
 
 
 
-
+// armure
+// vendeur equipement 
 // ecran pour voir quel stats augmenter apres un level up
 //
 // equilibrage degat(surtout au niveau des attaques des

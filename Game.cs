@@ -37,11 +37,20 @@ namespace heroes_Vs_Monster {
                     if ( moveX != Board.x - 34 ) {
                         moveX += 1;
                         }
-                    break;
+                    break;  
                     case ConsoleKey.LeftArrow:
                     if ( moveX != 1 ) {
                         moveX -= 1;
                         }
+                    break;
+                    case ConsoleKey.Escape:
+                    break;
+                    case ConsoleKey.I:
+                    //showIventaire();
+                    break;
+                    case ConsoleKey.C:
+                    //showCraftMenu();
+                    break;
                     break;
 
                     default:
@@ -109,7 +118,7 @@ namespace heroes_Vs_Monster {
 
         private void getLoot(Heroes hero) {
             int nbr = new Random().Next(2);
-            hero.Inventaire[(LootType) nbr] += 2;
+            hero.Materiaux[(LootType) nbr] += 2;
             }
 
         public bool CombatAleatoire() {
@@ -120,7 +129,7 @@ namespace heroes_Vs_Monster {
 
             do {
                 Board.BottomRightSquare(hero ,monster,SquareType.log);
-                int rps = Nav.NavList(10  ,5 ,Board.y-5);
+                int rps = Nav.NavList(10  ,9 ,Board.y-8);
                 switch ( rps ) {
                     
                     case 0:

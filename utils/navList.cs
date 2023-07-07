@@ -13,35 +13,35 @@ namespace heroes_Vs_Monster.utils {
             }
         public static int NavList(int distance ,int x = 0 ,int y = 0) {
             int element = Enum.GetValues(typeof(ActionP)).Length;
-            int moveX = x;
-            int moveY = y;
-            DisplayNavList(x ,y ,distance ,element ,( ( moveX - x ) / distance ));
+            int moveX = 0;
+            int moveY = 0;
+            DisplayNavList(x ,y ,element ,moveY);
             do {
                 ConsoleKeyInfo consoleKeyInfo = Console.ReadKey(true);
                 switch ( consoleKeyInfo.Key ) {
-                    case ConsoleKey.LeftArrow:
-                    if ( moveX-distance < x ) {
-                        moveX = distance * (element-1)+x;
+                    case ConsoleKey.DownArrow:
+                    if ( moveY == element+2 ) {
+                        moveY = 0;
                         }
                     else {
-                        moveX -= ( distance );
+                        moveY += 2;
                         }
-                    DisplayNavList(x ,y ,distance ,element,(( moveX - x ) / distance));
+                    DisplayNavList(x ,y ,element,moveY);
 
                     break;
-                    case ConsoleKey.RightArrow:
+                    case ConsoleKey.UpArrow:
 
-                    if ( moveX+element > x+ distance*(element-1)  ) {
-                        moveX = x;
+                    if ( moveY == 0  ) {
+                        moveY = 6;
                         }
                     else {
-                        moveX += ( distance );
+                        moveY -= 2;
                         }
-                    DisplayNavList(x ,y ,distance ,element,( moveX - x ) / distance);
+                    DisplayNavList(x ,y  ,element,moveY);
 
                     break;
                     case ConsoleKey.Spacebar:
-                    return ( (moveX-x) / distance );
+                    return ( moveY/2);
                     default:
                     break;
 
@@ -50,20 +50,17 @@ namespace heroes_Vs_Monster.utils {
                 } while ( true );
             }
 
-        private static void DisplayNavList(int x, int y,int distance,int element,int rps) {
-            Console.SetCursorPosition(x ,y);
-          
-            
+        private static void DisplayNavList(int x, int y,int element,int rps) {
+
             for ( int i = 0; i < element; i++ ) {
-                if ( i == rps ) {
+                Console.SetCursorPosition(x ,y+i*2);
+
+                if ( i*2 == rps ) {
                     Board.SetColor(Board.SelectBackground ,Board.selectFontColor);
                     }
                 Console.Write((ActionP)i);
                 Board.SetColor(Board.BasicBackground ,Board.fontColor);
-                int whiteSpace = Utils.DiffMaxCharacter(( (ActionP) i ).ToString(),distance);
-                for(int  j = 0; j < whiteSpace; j++ ) {
-                    Console.Write(" ");
-                    }
+            
                 }
             
 
