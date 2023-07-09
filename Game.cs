@@ -1,9 +1,13 @@
 ﻿using heroes_Vs_Monster.board;
 using heroes_Vs_Monster.Entity;
+using heroes_Vs_Monster.Entity.heroes;
+using heroes_Vs_Monster.Entity.Monster;
+using heroes_Vs_Monster.Entity.Monster.Monster;
 using heroes_Vs_Monster.Item;
 using heroes_Vs_Monster.utils;
 
-namespace heroes_Vs_Monster {
+namespace heroes_Vs_Monster
+    {
     public class Game {
         public bool isAlive = true;
         public string m;

@@ -1,5 +1,7 @@
 ﻿using heroes_Vs_Monster.board;
 using heroes_Vs_Monster.Entity;
+using heroes_Vs_Monster.Entity.Monster;
+using heroes_Vs_Monster.Entity.Monster.Monster;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -9,7 +11,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace heroes_Vs_Monster.utils {
+namespace heroes_Vs_Monster.utils
+    {
     public static class Utils {
         
         public static int DiffMaxCharacter(string s ,int max) {
